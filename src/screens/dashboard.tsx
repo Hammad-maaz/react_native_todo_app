@@ -1,12 +1,14 @@
-import { SafeAreaView, StyleSheet, Text, View } from "react-native"
-import { Dimensions } from "react-native"
-import { TextInput } from "react-native-gesture-handler"
-import { AppColors } from "../utils/app_colors"
-import MaterialIcons from "react-native-vector-icons/MaterialIcons";
-import { StackNavigationProp } from "@react-navigation/stack";
-import { RouteParamsList } from "../navigations/routes";
-import MyTextInput from "../res/components/my_text_input";
-import { useState } from "react";
+import {
+    StackNavigationProp,
+    RouteParamsList,
+    Dimensions,
+    SafeAreaView,
+    View,
+    MaterialIcons,
+    MyTextInput,
+    AppColors,
+    StyleSheet,
+} from '../exports'
 
 
 type RouteProps = StackNavigationProp<RouteParamsList, 'dashboard'>
@@ -16,13 +18,11 @@ type props = {
 
 const {width, height} = Dimensions.get('window')
 const Dashboard:React.FC<props> = ({navigation}) => {
-    const [search, setSearch] = useState('')
-
 
     return(
         <SafeAreaView style={styles.main}>
             <View style={styles.searchAndAdd}>
-                <MyTextInput placeholder="Search ToDo" value={search} onChangeText={(text)=> {setSearch(text)}}/>
+                <MyTextInput placeholder="Search ToDo" value="" onChangeText={(text)=> {}} style={styles.search}/>
                 <View style={styles.addIconBackground}>
                     <MaterialIcons name="add" size={width * .1} color={AppColors.whiteColor} onPress={() => {navigation.navigate('addTodo')}}/>
                 </View>
@@ -46,17 +46,18 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     
     },
-    search: {
-        width: width * .76,
-        height: height * .06,
-        borderColor: AppColors.blackColor,
-        opacity: .4,
-        borderWidth: 1,
-        borderRadius: width * .03,
-        paddingHorizontal: width * .03,
-        paddingVertical: height * .01,
-        fontSize: width * .05
-    },
+     search: {
+            width: width * .76,
+            height: height * .06,
+            borderColor: AppColors.blackColor,
+            opacity: .4,
+            borderWidth: 1,
+            borderRadius: width * .03,
+            paddingHorizontal: width * .03,
+            paddingVertical: height * .01,
+            fontSize: width * .05
+        },
+    
     addIconBackground: {
         height: height * .05,
         width: height * .05, 

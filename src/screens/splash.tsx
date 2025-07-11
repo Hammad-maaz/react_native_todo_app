@@ -1,9 +1,14 @@
-import { StackNavigationProp } from "@react-navigation/stack"
-import { use, useEffect } from "react"
-import { Image, StyleSheet, Text, View } from "react-native"
-import { Dimensions } from "react-native"
-import { RouteParamsList } from "../navigations/routes"
-import { AppColors } from "../utils/app_colors"
+import {
+    View,
+    Text, 
+    StyleSheet, 
+    Image, 
+    Dimensions,
+    StackNavigationProp,
+    RouteParamsList,
+    useEffect,
+    AppColors
+}  from '../exports'
 
 
 type RoutesProps = StackNavigationProp<RouteParamsList, 'splash'>

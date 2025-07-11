@@ -1,11 +1,17 @@
-import { NavigationContainer } from "@react-navigation/native"
-import Routes from "./src/navigations/routes"
+import {
+  Provider,
+  store,
+  NavigationContainer,
+  Routes
+} from './src/exports'
 
 const App = () => {
   return(
-    <NavigationContainer>
-      <Routes />
-    </NavigationContainer>
+    <Provider store={store}>
+      <NavigationContainer>
+        <Routes />
+      </NavigationContainer>
+    </Provider>
   )
 }
 
