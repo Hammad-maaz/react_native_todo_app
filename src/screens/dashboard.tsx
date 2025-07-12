@@ -7,7 +7,11 @@ import {
     MaterialIcons,
     MyTextInput,
     AppColors,
-    StyleSheet,
+    useSelector,
+    useDispatch,
+    AppDispatch,
+    RootState,
+    setTodoTitle
 } from '../exports'
 
 
@@ -18,12 +22,18 @@ type props = {
 
 const {width, height} = Dimensions.get('window')
 const Dashboard:React.FC<props> = ({navigation}) => {
+    const selector = useSelector((state: RootState) => state.variables)
+    const disatch = useDispatch<AppDispatch>()
 
     return(
-        <SafeAreaView style={styles.main}>
-            <View style={styles.searchAndAdd}>
-                <MyTextInput placeholder="Search ToDo" value="" onChangeText={(text)=> {}} style={styles.search}/>
-                <View style={styles.addIconBackground}>
+        <SafeAreaView className='flex-1 flex-col mx-3 my-5 justify-between'>
+            <View className='flex-row justify-between items-center'>
+                <MyTextInput 
+                    placeholder="Search ToDo" 
+                    value={selector.todoTitle} 
+                    onChangeText={(text)=> {disatch(setTodoTitle(text))}} 
+                    className="w-80 h-14 border-grayColor border-2 rounded-lg px-3 py-1 text-2xl placeholder:text-grayColor text-blackColor" />
+                <View className='justify-center items-center bg-blueColor opacity-30 w-[45px] h-[45px] rounded-full'>
                     <MaterialIcons name="add" size={width * .1} color={AppColors.whiteColor} onPress={() => {navigation.navigate('addTodo')}}/>
                 </View>
             </View>
@@ -31,42 +41,5 @@ const Dashboard:React.FC<props> = ({navigation}) => {
         </SafeAreaView>
     )
 }
-
-
-const styles = StyleSheet.create({
-    main: {
-        flex: 1,
-        flexDirection: 'column',
-        marginHorizontal: width * .02,
-        marginVertical: height * .03
-    },
-    searchAndAdd: {
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        alignItems: 'center'
-    
-    },
-     search: {
-            width: width * .76,
-            height: height * .06,
-            borderColor: AppColors.blackColor,
-            opacity: .4,
-            borderWidth: 1,
-            borderRadius: width * .03,
-            paddingHorizontal: width * .03,
-            paddingVertical: height * .01,
-            fontSize: width * .05
-        },
-    
-    addIconBackground: {
-        height: height * .05,
-        width: height * .05, 
-        borderRadius: (height * .05)/2, 
-        backgroundColor: AppColors.blueColor, 
-        opacity: .3,
-        justifyContent: 'center', 
-        alignItems: 'center'
-    }
-})
 
 export default Dashboard

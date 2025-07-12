@@ -12,6 +12,8 @@ import{
         todoColor: AppColors.whiteColor,
         todoDate: "",
         todoTime: "",
+        // todoDate: new Date().toISOString().split('T')[0],
+        // todoTime: new Date().toISOString().split('T')[1].split('.')[0],
 
         dateModal: false,
         timeModal: false

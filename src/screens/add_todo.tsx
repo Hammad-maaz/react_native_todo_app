@@ -15,50 +15,74 @@ import{
     Dimensions,
     DateOrTime,
     setTodoDate,
-    setTodotime
+    setTodotime,
+    MyButton,
+    addTodo
 } from '../exports'
 
 const {width, height} = Dimensions.get('window')
 const AddToDo:React.FC = () => {
     const selector = useSelector((state: RootState) => state.variables)
     const dispatch = useDispatch<AppDispatch>()
+    let newDate = ""
+    let newTime = ""
 
     return(
         <View style={styles.main}>
             <Text style={styles.text}>Todo Title:</Text>
-            <MyTextInput placeholder="Title" value={selector.todoTitle} onChangeText={(text)=> {dispatch(setTodoTitle(text))}} style={styles.search}/>
+            <MyTextInput 
+                placeholder="Title" 
+                value={selector.todoTitle} 
+                onChangeText={(text)=> {dispatch(setTodoTitle(text))}} 
+                className="w-80 h-14 border-grayColor border-2 rounded-lg px-3 py-1 text-2xl placeholder:text-grayColor text-blackColor"/>
             <View style={{height: height * .02}}></View>
 
             <Text style={styles.text}>Todo Description:</Text>
-            <MyTextInput placeholder="Title" value={selector.todoTitle} onChangeText={(text)=> {dispatch(setTodoTitle(text))}} style={styles.search}/>
+            <MyTextInput
+                placeholder="Description" 
+                value={selector.todoTitle} 
+                onChangeText={(text)=> {dispatch(setTodoTitle(text))}} 
+                className="w-80 h-14 border-grayColor border-2 rounded-lg px-3 py-1 text-2xl placeholder:text-grayColor text-blackColor"/>
             <View style={{height: height * .02}}></View>
 
             <Text style={styles.text}>Select Date:</Text>
-            <DateOrTime text={selector.todoDate ? selector.todoDate : 'Select Date'} icon='calendar-month' onPress={() => {dispatch(setDateModal(true))}}/>
+            <DateOrTime
+                text={selector.todoDate.toString() === "" ? "Select Date" : selector.todoDate.toString()} 
+                icon='calendar-month' 
+                onPress={() => {dispatch(setDateModal(true))}}/>
             <View style={{height: height * .02}}></View>
 
             <Text style={styles.text}>Select Time:</Text>
-            <DateOrTime text={selector.todoTime ? selector.todoTime : 'Select Time'} icon='alarm' onPress={() => {dispatch(setTimeModal(true))}}/>
+            <DateOrTime
+                text={selector.todoTime.toString() === "" ? "Select Time" : selector.todoTime.toString()}
+                 icon='alarm'
+                onPress={() => {dispatch(setTimeModal(true))}}/>
 
+            <MyButton
+                buttonName='Add ToDo'
+                onPress={() => {addTodo(selector.todoTitle, selector.todoDescription, selector.todoColor, selector.todoDate, selector.todoTime)}}
+             />
 
 
 
             {selector.dateModal 
                 && <DateTimePickerModel 
                         mode='date'
-                        visible={selector.dateModal} 
+                        visible={selector.dateModal}
+                        value={selector.todoDate.toString() === "" ? new Date() : new Date(selector.todoDate)}
                         onCancel={() => {dispatch(setDateModal(false))}} 
-                        onCofirm={() => {dispatch(setDateModal(false))}} 
-                        onChange={(event, date) => {if (date) {console.log("User selected:", date.toISOString());}}}
+                        onCofirm={() => {dispatch(setDateModal(false)); dispatch(setTodoDate(newDate))}} 
+                        onChange={(event, date) => {if (date) {newDate = date.toLocaleDateString();}}}
             />}
 
             {selector.timeModal 
                 && <DateTimePickerModel 
                         mode='time'
+                        value={selector.todoTime.toString() === "" ? new Date() : new Date(selector.todoTime)}
                         visible={selector.timeModal} 
                         onCancel={() => {dispatch(setTimeModal(false))}} 
-                        onCofirm={() => {dispatch(setTimeModal(false))}} 
-                        onChange={(event, time) => {if (time) {console.log("User TIme:", time.toLocaleTimeString());}}}
+                        onCofirm={() => {dispatch(setTimeModal(false)); dispatch(setTodotime(newTime))}} 
+                        onChange={(event, time) => {if (time) {newTime = time.toLocaleTimeString();}}}
             />}
         </View>
     )

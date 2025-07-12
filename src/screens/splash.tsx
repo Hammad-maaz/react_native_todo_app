@@ -1,13 +1,11 @@
 import {
     View,
     Text, 
-    StyleSheet, 
     Image, 
     Dimensions,
     StackNavigationProp,
     RouteParamsList,
-    useEffect,
-    AppColors
+    useEffect
 }  from '../exports'
 
 
@@ -25,32 +23,11 @@ const Splash:React.FC<props> =({navigation}) => {
     }, [])
 
     return(
-        <View style={styles.main}>
-            <Image source={require('../../assets/todo.png')} style={styles.todoImage}/>
-            <Text style={styles.todoText}>Welcome To ToDo</Text>
+        <View className='flex-1 flex-col justify-center items-center'>
+            <Image className='h-[20%] w-[100%]' source={require('../../assets/todo.png')}/>
+            <Text className={`text-2xl font-bold align-center text-blackColor`}>Welcome To ToDo</Text>
         </View>
     )
 }
-
-const styles = StyleSheet.create({
-    main: {
-        flex: 1,
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-
-    todoImage:{
-        height: height * .15,
-        width: width * .9
-    },
-
-    todoText: {
-        fontSize: width * .05,
-        fontWeight: 'bold',
-        textAlign: 'center',
-        color: AppColors.blackColor
-    }
-})
 
 export default Splash

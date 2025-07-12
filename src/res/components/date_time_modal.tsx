@@ -13,6 +13,7 @@ interface DateTimePickerModelProps {
     onChange: (text: any, date:any)=> void
     mode: string
     visible: boolean
+    value: Date
 }
 
 const DateTimePickerModel:React.FC<DateTimePickerModelProps> = (props) => {
@@ -41,7 +42,7 @@ const DateTimePickerModel:React.FC<DateTimePickerModelProps> = (props) => {
                     minimumDate={new Date()}
                     maximumDate={new Date(2030, 11, 31)}
                     display="spinner"
-                    value={new Date()}
+                    value={props.value}
                     onChange={props.onChange}
                 />
                 <View
