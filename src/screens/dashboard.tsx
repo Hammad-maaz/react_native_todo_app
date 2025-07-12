@@ -11,7 +11,11 @@ import {
     useDispatch,
     AppDispatch,
     RootState,
-    setTodoTitle
+    setTodoTitle,
+    useQuery,
+    TodoSchema,
+    FlashList,
+    Text
 } from '../exports'
 
 
@@ -21,6 +25,7 @@ type props = {
 }
 
 const {width, height} = Dimensions.get('window')
+const allTodos = useQuery(TodoSchema)
 const Dashboard:React.FC<props> = ({navigation}) => {
     const selector = useSelector((state: RootState) => state.variables)
     const disatch = useDispatch<AppDispatch>()
@@ -36,6 +41,12 @@ const Dashboard:React.FC<props> = ({navigation}) => {
                 <View className='justify-center items-center bg-blueColor opacity-30 w-[45px] h-[45px] rounded-full'>
                     <MaterialIcons name="add" size={width * .1} color={AppColors.whiteColor} onPress={() => {navigation.navigate('addTodo')}}/>
                 </View>
+
+                <FlashList data={allTodos} renderItem={(item: any) => {
+                    return(
+                        <Text>{item.item.todoTitle}</Text>
+                    )
+                }}/>
             </View>
             
         </SafeAreaView>

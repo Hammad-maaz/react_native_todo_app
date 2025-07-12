@@ -60,8 +60,7 @@ const AddToDo:React.FC = () => {
 
             <MyButton
                 buttonName='Add ToDo'
-                onPress={() => {addTodo(selector.todoTitle, selector.todoDescription, selector.todoColor, selector.todoDate, selector.todoTime)}}
-             />
+                onPress={() => {addTodo(selector.todoTitle, selector.todoDescription, selector.todoColor, selector.todoDate, selector.todoTime)}}/>
 
 
 
