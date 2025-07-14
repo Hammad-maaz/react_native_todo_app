@@ -7,17 +7,36 @@ module.exports = {
     extend: {
       colors: {
         whiteColor: '#ffffff',
+        
         greenColor: '#4CAF50',
-        redColor: '#ff0000',
-        blueColor: '#0000ff',
+        greenLight: '#81C784',
+
+        redColor: '#FF0000',
+        redLight: '#FF6F61',
+
+        blueColor: '#0000FF',
+        blueLight: '#5C6BC0',
+
         blackColor: '#000000',
+        blackLight: '#4F4F4F',
+
         grayColor: '#808080',
-        orangeColor: '#ff8000',
+        grayLight: '#BDBDBD',
+
+        orangeColor: '#FF8000',
+        orangeLight: '#FFA726',
+
         purpleColor: '#800080',
-        cyanColor: '#00ffff',
-        magentaColor: '#ff00ff',
-        yellowColor: '#ffff00',
-        lightGrayColor: '#c0c0c0',
+        purpleLight: '#BA68C8',
+
+        cyanColor: '#00FFFF',
+        cyanLight: '#4DD0E1',
+
+        magentaColor: '#FF00FF',
+        magentaLight: '#F06292',
+
+        yellowColor: '#FFFF00',
+        yellowLight: '#FFF176',
       }
     },
   },

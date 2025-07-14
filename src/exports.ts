@@ -1,5 +1,6 @@
-import { Dimensions } from 'react-native'
 import { configureStore } from '@reduxjs/toolkit'
+import * as yup from 'yup'
+
 
 export {View, Text, TextInput, Button, Image, StyleSheet, Dimensions, SafeAreaView, Modal, TouchableHighlight, TouchableOpacity} from 'react-native'
 export {useEffect} from 'react'
@@ -10,7 +11,11 @@ export { useSelector, useDispatch } from 'react-redux'
 export {default as RNDateTimePicker} from "@react-native-community/datetimepicker"
 export {createSlice, type PayloadAction} from '@reduxjs/toolkit'
 export {Provider} from 'react-redux'
-export {default as FlashList} from '@shopify/flash-list'
+export {FlashList} from '@shopify/flash-list'
+export {Formik} from 'formik'
+export {yup}
+export { Swipeable } from 'react-native-gesture-handler';
+
 
 // Navigations
 export {createStackNavigator} from '@react-navigation/stack'
@@ -25,11 +30,12 @@ export {default as MyTextInput} from './res/components/my_text_input'
 export {default as DateTimePickerModel} from './res/components/date_time_modal'
 export {default as Routes} from './navigations/routes'
 export {default as store} from './redux/store'
-export { setTodoTitle, setTodoDescription, setTodoColor, setDateModal, setTimeModal, setTodoDate, setTodotime } from './redux/variables'
+export { setTodoTitle, setTodoDescription, setTodoColor, setDateModal, setTimeModal, setTodoDate, setTodotime, setSearch } from './redux/variables'
 export {default as DateOrTime} from './res/components/date_or_time'
 export {default as MyButton} from './res/components/my_button'
+export {default as TodoColor} from './res/components/todo_color'
 
 // Database
 export { Realm, RealmProvider, useRealm, useQuery } from '@realm/react'
 export {default as TodoSchema} from "./res/database/schema"
-export {addTodo} from './res/database/realm_crud'
+export {addTodo, deleteTodo} from './res/database/realm_crud'

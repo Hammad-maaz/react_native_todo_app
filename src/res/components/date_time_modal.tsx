@@ -39,7 +39,7 @@ const DateTimePickerModel:React.FC<DateTimePickerModelProps> = (props) => {
                 >
                 <RNDateTimePicker
                     mode={props.mode === 'date' ? 'date' : 'time'}
-                    minimumDate={new Date()}
+                    minimumDate={props.mode === 'date' ? new Date() : new Date(2020, 12, 31)}
                     maximumDate={new Date(2030, 11, 31)}
                     display="spinner"
                     value={props.value}

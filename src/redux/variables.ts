@@ -9,11 +9,10 @@ import{
     initialState: {
         todoTitle: "",
         todoDescription: "",
-        todoColor: AppColors.whiteColor,
+        todoColor: 'bg-grayLight',
         todoDate: "",
         todoTime: "",
-        // todoDate: new Date().toISOString().split('T')[0],
-        // todoTime: new Date().toISOString().split('T')[1].split('.')[0],
+        search: "",
 
         dateModal: false,
         timeModal: false
@@ -28,7 +27,7 @@ import{
         },
 
         setTodoColor: (state, action) => {
-            state.todoTitle = action.payload
+            state.todoColor = action.payload
         },
 
         setDateModal: (state, action:PayloadAction<boolean>)=>{
@@ -46,8 +45,12 @@ import{
         setTodoDate: (state, action:PayloadAction<string>)=>{
             state.todoDate = action.payload
         },
+
+        setSearch: (state, action:PayloadAction<string>)=>{
+            state.search = action.payload
+        },
     }
  })
 
- export const { setTodoTitle, setTodoDescription, setTodoColor, setDateModal, setTimeModal, setTodoDate, setTodotime } = VariablesSlice.actions
+ export const { setTodoTitle, setTodoDescription, setTodoColor, setDateModal, setTimeModal, setTodoDate, setTodotime, setSearch } = VariablesSlice.actions
  export const VariablesReducer = VariablesSlice.reducer

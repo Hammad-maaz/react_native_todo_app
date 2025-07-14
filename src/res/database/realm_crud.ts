@@ -1,5 +1,6 @@
 import{
-    Realm
+    Realm,
+    useRealm
 }from '../../exports'
 
 export const addTodo = (todoTitle: string, todoDescription: string, todoColor: string, todoDate: string, todoTime: string) => {
@@ -12,4 +13,15 @@ export const addTodo = (todoTitle: string, todoDescription: string, todoColor: s
         todoDate,
         createdAt: new Date().toDateString()
     }
+}
+
+export const getTodo = () => {
+    return{
+        
+    }
+}
+
+export const deleteTodo = (item: any) => {
+    const realm = useRealm()
+    
 }
