@@ -3,10 +3,12 @@ import{
     VariablesReducer,
     
 } from '../exports'
+import { TodoReducer } from './todo_slice'
 
 const store:any = configureStore({
     reducer: {
-        variables: VariablesReducer
+        variables: VariablesReducer,
+        todo: TodoReducer
     }
 })
 export type RootState = ReturnType<typeof store.getState>

@@ -36,6 +36,4 @@ export {default as MyButton} from './res/components/my_button'
 export {default as TodoColor} from './res/components/todo_color'
 
 // Database
-export { Realm, RealmProvider, useRealm, useQuery } from '@realm/react'
-export {default as TodoSchema} from "./res/database/schema"
-export {addTodo, deleteTodo} from './res/database/realm_crud'
+

@@ -7,6 +7,7 @@ import {
     RouteParamsList,
     useEffect
 }  from '../exports'
+import { createTable } from '../res/database/sqlite'
 
 
 type RoutesProps = StackNavigationProp<RouteParamsList, 'splash'>
@@ -18,6 +19,7 @@ const {width, height} = Dimensions.get('window')
 const Splash:React.FC<props> =({navigation}) => {
     useEffect(() => {
         setTimeout(() => {
+            createTable()
             navigation.navigate('dashboard')
         }, 1000)
     }, [])

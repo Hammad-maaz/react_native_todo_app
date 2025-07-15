@@ -9,7 +9,7 @@ import{
     initialState: {
         todoTitle: "",
         todoDescription: "",
-        todoColor: 'bg-grayLight',
+        todoColor: 'bg-grayColor',
         todoDate: "",
         todoTime: "",
         search: "",

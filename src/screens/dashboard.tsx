@@ -12,14 +12,15 @@ import {
     AppDispatch,
     RootState,
     setSearch,
-    useQuery,
-    TodoSchema,
     Text,
     FlashList,
     TouchableOpacity,
     Swipeable,
-    useRealm
+    useEffect,
 } from '../exports'
+import { updateTodo } from '../redux/todo_slice'
+import { TodoSchema } from '../res/database/schema'
+import { deleteTodo, getAllTodos } from '../res/database/sqlite'
 
 
 type RouteProps = StackNavigationProp<RouteParamsList, 'dashboard'>
@@ -30,9 +31,16 @@ type props = {
 const {width} = Dimensions.get('window')
 const Dashboard:React.FC<props> = ({navigation}) => {
     const selector = useSelector((state: RootState) => state.variables)
+    const todo = useSelector((state: RootState) => state.todo)
     const disatch = useDispatch<AppDispatch>()
-    const allTodos = useQuery(TodoSchema)
-    const realm = useRealm()
+    const handleGetTodod = async () => {
+    const fetchAllTodo = await getAllTodos();
+    disatch(updateTodo(fetchAllTodo))
+  };
+
+    useEffect(() => {
+        handleGetTodod()
+    }, )
 
 
     return(
@@ -48,7 +56,7 @@ const Dashboard:React.FC<props> = ({navigation}) => {
                 </View>
             </View>
             <FlashList
-                data={[...allTodos.sorted('createdAt')]}
+                data={todo.value}
                 estimatedItemSize={100}
                 renderItem={({ item }: { item: any }) => {
                     if(!item.todoTitle.toLowerCase().includes(selector.search.toLowerCase())){
@@ -58,9 +66,9 @@ const Dashboard:React.FC<props> = ({navigation}) => {
                     <TouchableOpacity
                         className="h-32 bg-red-600 justify-center items-center w-20 rounded-tr-xl rounded-br-xl ml-2"
                         onPress={() => {
-                        realm.write(()=> {
-                            realm.delete(item)
-                        })
+                            deleteTodo(item.id)
+                            const updatedTodos = todo.value.filter((todo: TodoSchema) => todo.id !== item.id)
+                            disatch(updateTodo(updatedTodos));
                         }}
                     >
                         <Text className="text-white font-bold">Delete</Text>

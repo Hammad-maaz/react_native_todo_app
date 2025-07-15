@@ -19,14 +19,14 @@ import{
     yup,
     TodoColor,
     setTodoColor,
-    addTodo,
-    useRealm,
     setTodoDescription,
     setTodoDate,
     setTodotime,
     StackNavigationProp,
     RouteParamsList
 } from '../exports'
+import { updateTodo } from '../redux/todo_slice'
+import { insertTodo } from '../res/database/sqlite'
 
 const {width, height} = Dimensions.get('window')
 type RootProps = StackNavigationProp<RouteParamsList, 'addTodo'>
@@ -35,10 +35,10 @@ type props = {
 }
 const AddToDo:React.FC<props> = ({navigation}) => {
     const selector = useSelector((state: RootState) => state.variables)
+    const todo = useSelector((state: RootState) => state.todo)
     const dispatch = useDispatch<AppDispatch>()
     let newDate = ""
     let newTime = ""
-    const realm = useRealm()
     
     const todoValidation = yup.object().shape({
         todoTitle: yup.string().required("Title is required"),
@@ -55,21 +55,18 @@ const AddToDo:React.FC<props> = ({navigation}) => {
         todoTime: selector.todoTime.toString()
     }
 
-    const handleSubmitFunction = ()=> {
-        
-    }
-
     return(
         <Formik 
         initialValues={initialValues} 
         validationSchema={todoValidation} 
         onSubmit={(values)=> {
-            realm.write(() => {realm.create("TodoSchema", addTodo(values.todoTitle, values.todoDescription, values.todoColor, values.todoDate, values.todoTime))});
             dispatch(setTodoTitle(''));
             dispatch(setTodoDescription(''));
-            dispatch(setTodoColor('bg-blackColor'));
+            dispatch(setTodoColor('bg-grayColor'));
             dispatch(setTodoDate(''));
             dispatch(setTodotime(''));
+            insertTodo(values.todoTitle, values.todoDescription, values.todoColor, values.todoDate, values.todoTime, values.todoDate)
+            dispatch(updateTodo([...todo.value, {todoTitle: values.todoTitle, todoDescription: values.todoDescription, todoColor: values.todoColor, todoDate: values.todoDate, todoTime: values.todoDate}]))
             navigation.goBack()
             }}>
             {({values, errors, handleSubmit, handleReset, handleChange,}) => (
@@ -108,11 +105,11 @@ const AddToDo:React.FC<props> = ({navigation}) => {
                             {errors.todoTime && <Text className='text-redColor text-[18px] mt-1'>{errors.todoTime.toString()}</Text>}
 
                             <View className='flex-row justify-start items-center mt-5'>
-                                <TodoColor color='bg-redColor' onPress={() => {handleChange('todoColor')('bg-redLight'); dispatch(setTodoColor('bg-redLight'))}}/>
-                                <TodoColor color='bg-greenColor'onPress={() => {handleChange('todoColor')('bg-greenLight'); dispatch(setTodoColor('bg-greenLight'))}}/>
-                                <TodoColor color='bg-purpleColor' onPress={() => {handleChange('todoColor')('bg-purpleLight'); dispatch(setTodoColor('bg-purpleLight'))}}/>
-                                <TodoColor color='bg-grayColor' onPress={() => {handleChange('todoColor')('bg-grayLight'); dispatch(setTodoColor('bg-grayLight'))}}/>
-                                <TodoColor color='bg-orangeColor' onPress={() => {handleChange('todoColor')('bg-orangeLight'); dispatch(setTodoColor('bg-orangeLight'))}}/>
+                                <TodoColor color='bg-redColor' onPress={() => {handleChange('todoColor')('bg-redLight'); dispatch(setTodoColor('bg-redColor'))}}/>
+                                <TodoColor color='bg-greenColor'onPress={() => {handleChange('todoColor')('bg-greenLight'); dispatch(setTodoColor('bg-greenColor'))}}/>
+                                <TodoColor color='bg-purpleColor' onPress={() => {handleChange('todoColor')('bg-purpleLight'); dispatch(setTodoColor('bg-purpleColor'))}}/>
+                                <TodoColor color='bg-grayColor' onPress={() => {handleChange('todoColor')('bg-grayLight'); dispatch(setTodoColor('bg-grayColor'))}}/>
+                                <TodoColor color='bg-orangeColor' onPress={() => {handleChange('todoColor')('bg-orangeLight'); dispatch(setTodoColor('bg-orangeColor'))}}/>
                             </View>
 
                             <MyButton
