@@ -25,7 +25,9 @@ import{
     StackNavigationProp,
     RouteParamsList,
     insertTodo,
-    updateTodo
+    updateTodo,
+    Platform,
+    Keyboard
 } from '../exports'
 
 const {width, height} = Dimensions.get('window')
@@ -37,9 +39,8 @@ const AddToDo:React.FC<props> = ({navigation}) => {
     const selector = useSelector((state: RootState) => state.variables)
     const todo = useSelector((state: RootState) => state.todo)
     const dispatch = useDispatch<AppDispatch>()
-    let newDate = ""
-    let newTime = ""
-    
+
+
     const todoValidation = yup.object().shape({
         todoTitle: yup.string().required("Title is required"),
         todoDescription: yup.string().required("Description is required"),
@@ -93,7 +94,7 @@ const AddToDo:React.FC<props> = ({navigation}) => {
                             <DateOrTime
                                 text={values.todoDate.toString() || "Select Date"} 
                                 icon='calendar-month' 
-                                onPress={() => {dispatch(setDateModal(true))}}/>
+                                onPress={() => {Keyboard.dismiss(); dispatch(setDateModal(true))}}/>
                             {errors.todoDate && <Text className='text-redColor text-[18px] mt-1'>{errors.todoDate.toString()}</Text>}
                             <View style={{height: height * .02}}></View>
 
@@ -101,15 +102,15 @@ const AddToDo:React.FC<props> = ({navigation}) => {
                             <DateOrTime
                                 text={values.todoTime.toString() || "Select Time"}
                                 icon='alarm'
-                                onPress={() => {dispatch(setTimeModal(true))}}/>
+                                onPress={() => {Keyboard.dismiss(); dispatch(setTimeModal(true))}}/>
                             {errors.todoTime && <Text className='text-redColor text-[18px] mt-1'>{errors.todoTime.toString()}</Text>}
 
                             <View className='flex-row justify-start items-center mt-5'>
-                                <TodoColor color='bg-redColor' onPress={() => {handleChange('todoColor')('bg-redLight'); dispatch(setTodoColor('bg-redColor'))}}/>
-                                <TodoColor color='bg-greenColor'onPress={() => {handleChange('todoColor')('bg-greenLight'); dispatch(setTodoColor('bg-greenColor'))}}/>
-                                <TodoColor color='bg-purpleColor' onPress={() => {handleChange('todoColor')('bg-purpleLight'); dispatch(setTodoColor('bg-purpleColor'))}}/>
-                                <TodoColor color='bg-grayColor' onPress={() => {handleChange('todoColor')('bg-grayLight'); dispatch(setTodoColor('bg-grayColor'))}}/>
-                                <TodoColor color='bg-orangeColor' onPress={() => {handleChange('todoColor')('bg-orangeLight'); dispatch(setTodoColor('bg-orangeColor'))}}/>
+                                <TodoColor color='bg-redColor' onPress={() => {Keyboard.dismiss(); handleChange('todoColor')('bg-redLight'); dispatch(setTodoColor('bg-redColor'))}}/>
+                                <TodoColor color='bg-greenColor'onPress={() => {Keyboard.dismiss();handleChange('todoColor')('bg-greenLight'); dispatch(setTodoColor('bg-greenColor'))}}/>
+                                <TodoColor color='bg-purpleColor' onPress={() => {Keyboard.dismiss();handleChange('todoColor')('bg-purpleLight'); dispatch(setTodoColor('bg-purpleColor'))}}/>
+                                <TodoColor color='bg-grayColor' onPress={() => {Keyboard.dismiss();handleChange('todoColor')('bg-grayLight'); dispatch(setTodoColor('bg-grayColor'))}}/>
+                                <TodoColor color='bg-orangeColor' onPress={() => {Keyboard.dismiss();handleChange('todoColor')('bg-orangeLight'); dispatch(setTodoColor('bg-orangeColor'))}}/>
                             </View>
 
                             <MyButton
@@ -122,21 +123,17 @@ const AddToDo:React.FC<props> = ({navigation}) => {
                                 && <DateTimePickerModel 
                                         mode='date'
                                         visible={selector.dateModal}
-                                        value={selector.todoDate.toString() === "" ? new Date() : new Date(selector.todoDate)}
+                                        display={Platform.OS === 'ios' ? 'inline' : 'default'}
                                         onCancel={() => {dispatch(setDateModal(false))}} 
-                                        onCofirm={() => {dispatch(setDateModal(false)); handleChange('todoDate')(newDate === "" ? new Date().toLocaleDateString([], {dateStyle: 'medium'}) : newDate);}} 
-                                        onChange={(event, date) => {if (date) {newDate = date.toLocaleDateString([], {dateStyle: 'medium'});}}}
+                                        onCofirm={(date) => {dispatch(setDateModal(false)); handleChange('todoDate')(date.toLocaleDateString([], {dateStyle: 'medium'}));}} 
                             />}
 
                             {selector.timeModal 
                                 && <DateTimePickerModel 
                                         mode='time'
-                                        value={selector.todoTime.toString() === "" ? new Date() : new Date(selector.todoTime)}
                                         visible={selector.timeModal} 
                                         onCancel={() => {dispatch(setTimeModal(false))}} 
-                                        onCofirm={() => {handleChange('todoTime')(newTime === "" ? new Date().toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', hour12: true}) : newTime); dispatch(setTimeModal(false))}} 
-                                        // onCofirm={() => {dispatch(setTimeModal(false)); handleChange('todoTime')(newTime); dispatch(setTodotime(newTime))}} 
-                                        onChange={(event, time) => {if (time) {newTime = time.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', hour12: true})}}}
+                                        onCofirm={(time) => {handleChange('todoTime')(time.toLocaleTimeString([], {hour: '2-digit', minute: '2-digit', hour12: true})); dispatch(setTimeModal(false))}} 
                             />}
                     </View>
             )} 

@@ -52,7 +52,7 @@ const Dashboard:React.FC<props> = ({navigation}) => {
                     value={selector.search} 
                     onChangeText={(text)=> {disatch(setSearch(text))}} 
                     className="w-80 h-14 border-grayColor border-2 rounded-lg px-3 py-1 text-2xl placeholder:text-grayColor text-blackColor" />
-                <View className='justify-center items-center bg-blueColor opacity-30 w-[45px] h-[45px] rounded-full'>
+                <View className='justify-center items-center bg-blueLight w-[45px] h-[45px] rounded-full'>
                     <MaterialIcons name="add" size={width * .1} color={AppColors.whiteColor} onPress={() => {navigation.navigate('addTodo')}}/>
                 </View>
             </View>

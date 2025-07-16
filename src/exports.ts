@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import * as yup from 'yup'
 
 
-export {Platform, View, Text, TextInput, Button, Image, StyleSheet, Dimensions, SafeAreaView, Modal, TouchableHighlight, TouchableOpacity} from 'react-native'
+export {Keyboard, Platform, View, Text, TextInput, Button, Image, StyleSheet, Dimensions, SafeAreaView, Modal, TouchableHighlight, TouchableOpacity} from 'react-native'
 export {useEffect} from 'react'
 export {useNavigation, NavigationContainer} from '@react-navigation/native'
 export {configureStore}
@@ -15,6 +15,7 @@ export {FlashList} from '@shopify/flash-list'
 export {Formik} from 'formik'
 export {yup}
 export { Swipeable } from 'react-native-gesture-handler';
+export { default as DateTimePickerModal } from "react-native-modal-datetime-picker"
 
 
 // Navigations
