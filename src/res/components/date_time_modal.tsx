@@ -15,7 +15,8 @@ interface DateTimePickerModelProps {
 
 const DateTimePickerModel: React.FC<DateTimePickerModelProps> = (props) => {
   return(
-    <DateTimePickerModal 
+    <DateTimePickerModal
+      maximumDate={new Date(2030, 11, 31)} 
       mode={props.mode} 
       isVisible={props.visible} 
       onConfirm={props.onCofirm} 
