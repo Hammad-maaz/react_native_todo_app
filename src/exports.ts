@@ -2,7 +2,7 @@ import { configureStore } from '@reduxjs/toolkit'
 import * as yup from 'yup'
 
 
-export {View, Text, TextInput, Button, Image, StyleSheet, Dimensions, SafeAreaView, Modal, TouchableHighlight, TouchableOpacity} from 'react-native'
+export {Platform, View, Text, TextInput, Button, Image, StyleSheet, Dimensions, SafeAreaView, Modal, TouchableHighlight, TouchableOpacity} from 'react-native'
 export {useEffect} from 'react'
 export {useNavigation, NavigationContainer} from '@react-navigation/native'
 export {configureStore}
@@ -34,6 +34,12 @@ export { setTodoTitle, setTodoDescription, setTodoColor, setDateModal, setTimeMo
 export {default as DateOrTime} from './res/components/date_or_time'
 export {default as MyButton} from './res/components/my_button'
 export {default as TodoColor} from './res/components/todo_color'
+export { TodoReducer, updateTodo} from './redux/todo_slice'
 
 // Database
+export {default as SQLite} from "react-native-sqlite-storage"
+export type { TodoSchema } from "./res/database/schema"
+export { initialState } from "./res/database/schema"
+export { insertTodo, getAllTodos, deleteTodo } from './res/database/sqlite'
+
 

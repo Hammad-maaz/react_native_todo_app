@@ -1,9 +1,9 @@
 import{
     configureStore,
+    TodoReducer,
     VariablesReducer,
     
 } from '../exports'
-import { TodoReducer } from './todo_slice'
 
 const store:any = configureStore({
     reducer: {

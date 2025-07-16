@@ -1,6 +1,4 @@
-import SQLite from "react-native-sqlite-storage"
-import { Alert } from "react-native"
-import { TodoSchema } from "./schema"
+import{ SQLite, TodoSchema } from '../../exports'
 
 
 const db = SQLite.openDatabase(

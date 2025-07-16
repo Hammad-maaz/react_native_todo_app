@@ -1,5 +1,4 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { initialState, TodoSchema } from "../res/database/schema";
+import{ createSlice, initialState, PayloadAction, TodoSchema } from '../exports'
 
 const TodoSlice = createSlice({
     name: "todo",

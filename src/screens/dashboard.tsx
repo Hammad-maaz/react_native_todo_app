@@ -17,10 +17,11 @@ import {
     TouchableOpacity,
     Swipeable,
     useEffect,
+    getAllTodos,
+    updateTodo,
+    deleteTodo,
+    TodoSchema,
 } from '../exports'
-import { updateTodo } from '../redux/todo_slice'
-import { TodoSchema } from '../res/database/schema'
-import { deleteTodo, getAllTodos } from '../res/database/sqlite'
 
 
 type RouteProps = StackNavigationProp<RouteParamsList, 'dashboard'>

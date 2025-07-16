@@ -23,10 +23,10 @@ import{
     setTodoDate,
     setTodotime,
     StackNavigationProp,
-    RouteParamsList
+    RouteParamsList,
+    insertTodo,
+    updateTodo
 } from '../exports'
-import { updateTodo } from '../redux/todo_slice'
-import { insertTodo } from '../res/database/sqlite'
 
 const {width, height} = Dimensions.get('window')
 type RootProps = StackNavigationProp<RouteParamsList, 'addTodo'>

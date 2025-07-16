@@ -3,7 +3,8 @@ import{
     View,
     RNDateTimePicker,
     Button,
-    Dimensions
+    Dimensions,
+    Platform
 } from '../../exports'
 
 const {width, height} = Dimensions.get('window')
@@ -45,7 +46,7 @@ const DateTimePickerModel:React.FC<DateTimePickerModelProps> = (props) => {
                     value={props.value}
                     onChange={props.onChange}
                 />
-                <View
+                {Platform.OS === "ios" && <View
                     style={{
                     flexDirection: 'row',
                     justifyContent: 'space-between',
@@ -55,7 +56,7 @@ const DateTimePickerModel:React.FC<DateTimePickerModelProps> = (props) => {
                 >
                     <Button title="Cancel" onPress={props.onCancel} />
                     <Button title="Confirm" onPress={props.onCofirm} />
-                </View>
+                </View>}
                 </View>
             </View>
         </Modal>
