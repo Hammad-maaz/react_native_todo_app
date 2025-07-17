@@ -13,6 +13,7 @@ import{
         todoDate: "",
         todoTime: "",
         search: "",
+        selectedDate: new Date().getDate().toString(),
 
         dateModal: false,
         timeModal: false
@@ -49,8 +50,12 @@ import{
         setSearch: (state, action:PayloadAction<string>)=>{
             state.search = action.payload
         },
+
+        setSelectedDate: (state, action:PayloadAction<string>)=>{
+            state.selectedDate = action.payload
+        }
     }
  })
 
- export const { setTodoTitle, setTodoDescription, setTodoColor, setDateModal, setTimeModal, setTodoDate, setTodotime, setSearch } = VariablesSlice.actions
+ export const { setTodoTitle, setTodoDescription, setTodoColor, setDateModal, setTimeModal, setTodoDate, setTodotime, setSearch, setSelectedDate } = VariablesSlice.actions
  export const VariablesReducer = VariablesSlice.reducer

@@ -31,11 +31,12 @@ export {default as MyTextInput} from './res/components/my_text_input'
 export {default as DateTimePickerModel} from './res/components/date_time_modal'
 export {default as Routes} from './navigations/routes'
 export {default as store} from './redux/store'
-export { setTodoTitle, setTodoDescription, setTodoColor, setDateModal, setTimeModal, setTodoDate, setTodotime, setSearch } from './redux/variables'
+export { setTodoTitle, setTodoDescription, setTodoColor, setDateModal, setTimeModal, setTodoDate, setTodotime, setSearch, setSelectedDate } from './redux/variables'
 export {default as DateOrTime} from './res/components/date_or_time'
 export {default as MyButton} from './res/components/my_button'
 export {default as TodoColor} from './res/components/todo_color'
 export { TodoReducer, updateTodo} from './redux/todo_slice'
+export { default as ScrollDate} from './res/components/scroll_date'
 
 // Database
 export {default as SQLite} from "react-native-sqlite-storage"

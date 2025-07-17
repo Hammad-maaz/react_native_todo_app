@@ -9,9 +9,9 @@ export interface TodoSchema{
 }
 
 type TodoState = {
-    value: TodoSchema[] | null
+    value: TodoSchema[]
 }
 
 export const initialState: TodoState ={
-    value: null
+    value: []
 }

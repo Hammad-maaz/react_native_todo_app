@@ -15,8 +15,8 @@ const Routes:React.FC = () => {
     return(
         <Stack.Navigator>
             <Stack.Screen name="splash" component={Splash} options={{headerShown: false}}/>
-            <Stack.Screen name="dashboard" component={Dashboard} />
-            <Stack.Screen name="addTodo" component={addTodo}/>
+            <Stack.Screen name="dashboard" component={Dashboard} options={{headerTitle: 'Dashboard'}} />
+            <Stack.Screen name="addTodo" component={addTodo} options={{headerTitle: 'Add Todo'}}/>
         </Stack.Navigator>
     )
 }

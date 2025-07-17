@@ -20,7 +20,7 @@ const Splash:React.FC<props> =({navigation}) => {
     useEffect(() => {
         setTimeout(() => {
             createTable()
-            navigation.navigate('dashboard')
+            navigation.replace('dashboard')
         }, 1000)
     }, [])
 
